@@ -5,11 +5,7 @@ the torch you carry, with framed paintings hung on the walls and something movin
 
 ## How it works
 
-**Maze generation.** Levels are generated with randomized Kruskal's algorithm over a grid of
-cells, using a union-find (disjoint-set) structure to track connectivity. Walls between cells
-are considered in random order and removed only when the two sides belong to separate sets.
-The result is a uniform spanning tree: every playthrough is unique, every cell is reachable,
-and there are no isolated regions or loops.
+**Maze generation.** Levels are generated with randomized Kruskal's algorithm over a grid of cells, using a union-find (disjoint-set) structure to track connectivity. Each cell starts in its own set. Walls are considered in random order: if the cells on either side belong to different sets, the wall is removed and the two sets are merged; if they already share a set, a path between them exists and the wall stays, preventing loops. The process ends when every cell belongs to one set. The result is a uniform spanning tree — every playthrough is unique, every cell is reachable, and there are no isolated regions.
 
 **Wall artwork.** Paintings are hung procedurally at runtime. Rather than using fixed-size
 frames, the canvas mesh is generated from each source image's aspect ratio, so tall and wide
